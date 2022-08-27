@@ -1,0 +1,22 @@
+<h1>User</h1>
+
+<table border ="2">
+  <tr>
+    <th>Id</th>
+    <th>Name</th>
+    <th>Email</th>
+
+    <th>User Type</th>
+    <th colspan="2">Action</th>
+
+  </tr>
+  <tr>
+    <td><%=@user.id%></td>
+    <td><%=@user.name%></td>
+<td><%=@user.email%></td>
+
+<td><%=@user.usertype%></td>
+<td><%= link_to 'edit',edit_user_path%></td>
+<td><%= button_to 'delete',user_path, method: :delete%></td>
+</tr>
+</table>

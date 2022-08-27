@@ -1,0 +1,39 @@
+
+<div class="container" align="center">
+  <div class="card" style="width: 30rem;">
+    <h1 class="card-title">Add Project</h1>
+    <div class="card-body">
+      <%=form_with model: @project do |project_form|%>
+
+        <div class="">
+          <%= project_form.label :title,class:"form-control",placeholder: 'title of project'%>
+          <%= project_form.text_field :title,class:"form-control"%>
+        </div>
+
+        <div class="">
+          <%= project_form.label :body,class:"form-control"%>
+          <%= project_form.text_area :body,class:"form-control ", style: "height:200px;"%>
+        </div>
+
+        <div class="">
+          <%= project_form.hidden_field :user_id, value: session[:user_id]%>
+        </div>
+        <div id="user_projects">
+          <%= project_form.fields_for :user_projects do |user_projects_form| %>
+              <%= render "user_project_fields", f: user_projects_form %>
+          <%end%>
+        <div class='links'>
+          <%= link_to_add_association 'add Users', project_form, :user_projects %>
+
+        </div>
+        </div>
+
+        <div class="">
+          <%= project_form.submit %>
+        </div>
+
+    </div>
+  </div>
+</div>
+
+<% end %>

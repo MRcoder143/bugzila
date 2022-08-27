@@ -1,0 +1,2 @@
+module BugzilasHelper
+end

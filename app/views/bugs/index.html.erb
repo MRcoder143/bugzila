@@ -1,0 +1,20 @@
+    <% if session[:user_id] %>
+
+    <h1>bugs index</h1>
+    <ul>
+      
+      <% @bugs.each do |b|%>
+      <li><%= link_to b.title, bug_path(b)%></li>
+
+      <%end%>
+    </ul>
+    <br><br>
+  <%if can? :create,Bug%>
+    <%= link_to 'create new bug',new_bug_path%>
+    <%end%>
+    <%= will_paginate @bugs %>
+
+    <% else %>
+
+    <% controller.redirect_to login_path %>
+    <%end%>

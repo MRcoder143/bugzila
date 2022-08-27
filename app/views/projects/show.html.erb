@@ -1,0 +1,33 @@
+<% if session[:user_id] %>
+
+<h1>Projects</h1>
+<div class="">
+
+  <h3><%=@project.title%></h3>
+  <div class="">
+    <%=@project.body%>
+    <h4>Assigned Users</h4>
+    <% @project.user_projects.each do |x|%>
+    <% @user_project_id = x.user_id%>
+    <% username = User.find(@user_project_id)%>
+    <%= username.name+","%>
+    <%end%>
+  </div>
+</div>
+<br>
+  <% if can? :update,Project%>
+<%= link_to 'edit',edit_project_path %>
+  <%end%>
+  <%if can? :destroy,Project%>
+<%= button_to 'delete', project_path,method: 'delete'  %>
+  <%end%>
+
+    <h4>Bugs</h4>
+      <%@bugs = Bug.where(project_id: @project.id)%>
+          <%@bugs.each do |b|%>
+          <%= "Title: #{b.title}, Deadline: #{b.deadline}, Status: #{b.status} "%><br>
+      <%end%>
+      <% else %>
+
+      <% controller.redirect_to login_path %>
+      <%end%>

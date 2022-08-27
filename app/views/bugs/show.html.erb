@@ -1,0 +1,54 @@
+<% if session[:user_id] %>
+
+      <h2 align="center">Bugs Show</h2>
+
+          <div  style = "float:left; margin-right:50px;">
+            <h3>Title</h3>
+            <%= @bug.title%>
+          </div>
+          <div  style = "float:left; margin-right:50px;">
+            <h3>Deadline</h3>
+            <%= @bug.deadline%>
+          </div>
+          <div  style = "float:left; margin-right:50px;">
+            <h3>Screenshot</h3>
+            <%= image_tag @bug.screenshot ,style: "width:100px;height:100ox;"%>
+          </div>
+          <div  style = "float:left; margin-right:50px;">
+            <h3>Type</h3>
+            <%= @bug.bugtype %>
+          </div>
+          <div style = "float:left; margin-right:50px;">
+            <h3>Status</h3>
+            <%= @bug.status %>
+          </div>
+          <div style = "float:left; margin-right:50px;">
+            <h3>Project</h3>
+            <% @projectid= @bug.project_id%>
+            <% @project = Project.find(@projectid)%>
+            <%= @project.title%>
+          </div>
+          <div style = "float:left; margin-right:50px;">
+            <h3>Creator</h3>
+            <% @user = User.find(session[:user_id])%>
+            <%= @user.name%>
+
+          </div>
+
+          <div style = "float:left; margin-right:50px;">
+            <h3>Resolver</h3>
+            <% resolver_id=@bug.resolver_id%>
+
+            <% @resolver = User.find(resolver_id)%>
+            <%= @resolver.name%>
+          </div>
+          <br>
+          <div>
+            <%= link_to "Edit",edit_bug_path,style: "float:left; margin-right:50px;" %>
+            <%= button_to "Delete",bug_path, method: :delete %>
+          </div>
+
+<% else %>
+
+<% controller.redirect_to login_path %>
+<%end%>

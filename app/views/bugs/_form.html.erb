@@ -1,0 +1,37 @@
+    <% if session[:user_id] %>
+
+        <%= form_with model: @bug,local: false do |f|%>
+
+            <%= f.hidden_field :user_id , value: session[:user_id]%>
+            <%= f.label :title%>
+            <%= f.text_field :title%><br><br>
+            <%= f.label :deadline%>
+            <%= f.datetime_field :deadline%><br><br>
+            <%= f.label :screenshot%>
+            <%= f.file_field :screenshot%><br><br>
+            <%= f.label :bugtype%>
+            <br>
+            <%= f.select :bugtype, [["Feature","feature"],["Bug","bug"]], {:prompt => "please select bug type"} %><br><br>
+            <div id = "bugstatusid">
+              <%= f.label :status%>
+              <%= f.select :status,[],{} %><br><br>
+            </div>
+            <br>
+            <%= f.label :project_id%>
+            <%= f.select :project_id, @projects.map { |t| [t.title, t.id]} ,{:prompt => "search project"},style: "width:200px;",class: "liveprojects"%>
+            <br><br>
+
+            <%= f.label :resolver_id%>
+            <%= f.collection_select :resolver_id,User.where(usertype:  'developer'),:id,:name,include_blank: true%>
+
+            <br><br>
+            <%= f.submit%>
+        <%end%>
+
+    <%= javascript_pack_tag 'bugs' %>
+    <%= javascript_pack_tag 'liveprojects' %>
+
+    <% else %>
+
+    <% controller.redirect_to login_path %>
+    <%end%>

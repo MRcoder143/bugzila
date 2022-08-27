@@ -1,0 +1,17 @@
+<% if session[:user_id] %><br><br><br>
+
+<div class="container mt-4">
+<h3>hello <%= link_to Current.user.email,user_path(Current.user.id)%></h3>
+  <% if can? :read,User%>
+<%= link_to 'user',users_path%>
+  <%end%>
+<%= link_to 'projects',projects_path%>
+  <%if can? :read,Bug%>
+<%= link_to 'bugs',bugs_path%>
+  <%end%>
+</div>
+
+<% else %>
+
+<% controller.redirect_to login_path %>
+<%end%>
