@@ -87,3 +87,4 @@ production:
   database: bugzila_production
   username: bugzila
   password: <%= ENV['BUGZILA_DATABASE_PASSWORD'] %>
+  secret_key_base: 0d0880bbdb94ae69bb8b279f06b8793bc6685f5a7b95133e6cb697cc3b05e628fa430fd595493ff7383d6ce5d770237ddc3a22b19b70d74f3e1858faba0e3775
