@@ -63,3 +63,6 @@ gem "select2-rails"
 
 gem 'cancancan'
 gem 'jwt'
+
+
+gem 'devise'
