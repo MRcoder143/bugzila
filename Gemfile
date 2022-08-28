@@ -62,3 +62,4 @@ gem 'will_paginate', '~> 3.3'
 gem "select2-rails"
 
 gem 'cancancan'
+gem 'jwt'
